@@ -1,52 +1,53 @@
 import { useState } from 'react';
 import { TextField } from '../TextField';
-import { Movie } from '../../types/Movie'
+import { Movie } from '../../types/Movie';
 
 type Props = {
-  onAdd: (movie: Movie) => void
-}
+  onAdd: (movie: Movie) => void;
+};
 
-export const NewMovie: React.FC<Props> = ({onAdd}) => {
+export const NewMovie: React.FC<Props> = ({ onAdd }) => {
   const [count, setCount] = useState(0);
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [imgUrl, setImgUrl] = useState('')
-  const [imdbUrl, setImdbUrl] = useState('')
-  const [imdbId, setImdbId] = useState('')
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [imgUrl, setImgUrl] = useState('');
+  const [imdbUrl, setImdbUrl] = useState('');
+  const [imdbId, setImdbId] = useState('');
 
   const formFieldHandler = (field: string, value: string) => {
     if (field) {
       switch (field) {
         case 'title':
-          setTitle(value)
-        break;
+          setTitle(value);
+          break;
 
         case 'description':
-          setDescription(value)
-        break;
+          setDescription(value);
+          break;
 
         case 'imgUrl':
-          setImgUrl(value)
-        break;
+          setImgUrl(value);
+          break;
 
         case 'imdbUrl':
-          setImdbUrl(value)
-        break;
+          setImdbUrl(value);
+          break;
 
         case 'imdbId':
-          setImdbId(value)
-        break;
+          setImdbId(value);
+          break;
       }
     }
-  }
+  };
 
-  const isFilled = title !== ''
-  && imgUrl !== ''
-  && imdbUrl !== ''
-  && imdbId !== ''
+  const isFilled =
+    title.trim() !== ''
+    && imgUrl.trim() !== ''
+    && imdbUrl.trim() !== ''
+    && imdbId.trim() !== '';
 
   const submitHandler = (event: React.FormEvent) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (isFilled) {
       const newMovie = {
@@ -54,11 +55,11 @@ export const NewMovie: React.FC<Props> = ({onAdd}) => {
         description: description || '',
         imgUrl,
         imdbUrl,
-        imdbId
+        imdbId,
       };
 
-      onAdd(newMovie)
-      setCount(count + 1)
+      onAdd(newMovie);
+      setCount(count + 1);
 
       setTitle('');
       setDescription('');
@@ -66,54 +67,49 @@ export const NewMovie: React.FC<Props> = ({onAdd}) => {
       setImdbUrl('');
       setImdbId('');
     }
-  }
-
+  };
 
   return (
-    <form
-    className="NewMovie"
-    key={count}
-    onSubmit={submitHandler}
-    >
+    <form className="NewMovie" key={count} onSubmit={submitHandler}>
       <h2 className="title">Add a movie</h2>
 
       <TextField
         name="title"
         label="Title"
         value={title}
-        onChange={(value) => formFieldHandler('title', value)}
+        onChange={value => formFieldHandler('title', value)}
         required
       />
 
       <TextField
-      name="description"
-      label="Description"
-      value={description}
-      onChange={(value) => formFieldHandler('description', value)}
+        name="description"
+        label="Description"
+        value={description}
+        onChange={value => formFieldHandler('description', value)}
       />
 
       <TextField
-      name="imgUrl"
-      label="Image URL"
-      value={imgUrl}
-      onChange={(value) => formFieldHandler('imgUrl', value)}
-      required
+        name="imgUrl"
+        label="Image URL"
+        value={imgUrl}
+        onChange={value => formFieldHandler('imgUrl', value)}
+        required
       />
 
       <TextField
-      name="imdbUrl"
-      label="Imdb URL"
-      value={imdbUrl}
-      onChange={(value) => formFieldHandler('imdbUrl', value)}
-      required
+        name="imdbUrl"
+        label="Imdb URL"
+        value={imdbUrl}
+        onChange={value => formFieldHandler('imdbUrl', value)}
+        required
       />
 
       <TextField
-      name="imdbId"
-      label="Imdb ID"
-      value={imdbId}
-      onChange={(value) => formFieldHandler('imdbId', value)}
-      required
+        name="imdbId"
+        label="Imdb ID"
+        value={imdbId}
+        onChange={value => formFieldHandler('imdbId', value)}
+        required
       />
 
       <div className="field is-grouped">
